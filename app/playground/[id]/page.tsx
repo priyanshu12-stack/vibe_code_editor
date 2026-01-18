@@ -89,7 +89,8 @@ const MainPlaygroundPage = () => {
     error: containerError,
     instance,
     writeFileSync,
-// @ts-expect-error
+  // @ts-expect-error webcontainer typing mismatch
+
   } = useWebContainer({ templateData });
 
   const lastSyncedContent = useRef<Map<string, string>>(new Map());
@@ -201,9 +202,10 @@ const MainPlaygroundPage = () => {
           JSON.stringify(latestTemplateData)
         );
 
-    // @ts-expect-error
+// @ts-expect-error recursive template tree typing
           const updateFileContent = (items: unknown[]) =>
-        // @ts-expect-error
+        // @ts-expect-error dynamic template item structure
+
           items.map((item) => {
             if ("folderName" in item) {
               return { ...item, items: updateFileContent(item.items) };

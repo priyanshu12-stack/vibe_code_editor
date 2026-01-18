@@ -19,12 +19,21 @@ const Page = async () => {
         {playgrounds && playgrounds.length === 0 ? (
           <EmptyState />
         ) : (
-          <ProjectTable
-            projects={playgrounds || []}
-            onDeleteProject={deleteProjectById}
-            onUpdateProject={editProjectById}
-            onDuplicateProject={duplicateProjectById}
-          />
+      <ProjectTable
+  projects={(playgrounds || []).map((p) => ({
+    ...p,
+    description: p.description ?? "",
+    user: {
+      ...p.user,
+      name: p.user.name ?? "",
+    },
+  }))}
+  onDeleteProject={deleteProjectById}
+  onUpdateProject={editProjectById}
+  onDuplicateProject={duplicateProjectById}
+/>
+
+
         )}
       </div>
     </div>
